@@ -1,5 +1,7 @@
 use std::process::Command;
 use regex::Regex;
+use std::net::IpAddr;
+use std::str::FromStr;
 
 
 fn parse(regex: &str, process_line: &str) -> Option<String> {
@@ -42,17 +44,26 @@ fn parse_ip_addresses(process_line: &str) -> Option<(String, String)> {
     Some((from, to))
 }
 
+#[derive(Debug)]
 pub struct Process {
     pub pid: String,
-    pub from: String,
-    pub to: String
+    pub from: IpAddr,
+    pub to: IpAddr
 }
 
 impl Process {
     pub fn new(process_line: &str) -> Option<Process> {
         let (from, to) = match parse_ip_addresses(process_line) {
-            Some((f, t)) => (f, t),
-            None => ("".into(), "".into())
+            Some((f, t)) => {
+                let from = IpAddr::from_str(&f);
+                let to = IpAddr::from_str(&t);
+                if from.is_ok() && to.is_ok() {
+                    (from.unwrap(), to.unwrap())
+                } else {
+                    return None
+                }
+            }
+            None => return None
         };
 
         let pid_or_none = parse_pid(process_line);
@@ -66,6 +77,10 @@ impl Process {
                 to: to
             })
         }
+    }
+
+    pub fn matches(&self, from: &IpAddr, to: &IpAddr) -> bool {
+        self.from.eq(from) && self.to.eq(to)
     }
 }
 

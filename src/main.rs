@@ -18,12 +18,18 @@ fn print_err(message: &str) {
 
 fn queue_callback(msg: &nfqueue::Message, state: &mut State) {
     state.increment();
+    let processes = process_mon::active_connections();
 
     if let Some(header) = Ipv4Packet::new(msg.get_payload()) {
         let source = IpAddr::V4(header.get_source());
         let destination = IpAddr::V4(header.get_destination());
+        let known_connection = processes
+            .iter()
+            .filter(|process| process.matches(&source, &destination)).next();
 
-        println!("Intercepted {} -> {}", source, destination);
+        if known_connection.is_some() {
+            println!("Intercepted(PID: {}) {} -> {}", known_connection.unwrap().pid, source, destination);
+        }
         msg.set_verdict(nfqueue::Verdict::Accept);
     }
 }
