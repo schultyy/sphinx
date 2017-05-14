@@ -7,3 +7,4 @@ authors = ["Jan Schulte <hello@unexpected-co.de>"]
 nfqueue = { git = "https://github.com/chifflier/nfqueue-rs.git" }
 libc = "0.2.22"
 pnet = "0.17.1"
+regex = "0.2"
