@@ -16,9 +16,9 @@ fn parse(regex: &str, process_line: &str) -> Option<String> {
         .map_or(None, |s| Some(s.as_str().into()))
 }
 
-// fn parse_process(process_line: &str) -> String {
-//     parse(r"users:\(\(\\"(\\w+)\"", process_line)
-// }
+fn parse_process(process_line: &str) -> Option<String> {
+    parse(r#"users:\(\("([\w\-\+]+)""#, process_line)
+}
 
 fn parse_pid(process_line: &str) -> Option<String> {
     parse(r"pid=(\d+)", process_line)
@@ -47,6 +47,7 @@ fn parse_ip_addresses(process_line: &str) -> Option<(String, String)> {
 #[derive(Debug)]
 pub struct Process {
     pub pid: String,
+    pub process: String,
     pub from: IpAddr,
     pub to: IpAddr
 }
@@ -68,10 +69,13 @@ impl Process {
 
         let pid_or_none = parse_pid(process_line);
 
-        if pid_or_none.is_none() {
+        let process_or_none = parse_process(process_line);
+
+        if pid_or_none.is_none() || process_or_none.is_none() {
             None
         } else {
             Some(Process {
+                process: process_or_none.unwrap(),
                 pid: pid_or_none.unwrap(),
                 from: from,
                 to: to

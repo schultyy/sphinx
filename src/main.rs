@@ -28,7 +28,8 @@ fn queue_callback(msg: &nfqueue::Message, state: &mut State) {
             .filter(|process| process.matches(&source, &destination)).next();
 
         if known_connection.is_some() {
-            println!("Intercepted(PID: {}) {} -> {}", known_connection.unwrap().pid, source, destination);
+            let conn = known_connection.unwrap();
+            println!("Intercepted(Process: {} - {}) {} -> {}", conn.process, conn.pid, source, destination);
         }
         msg.set_verdict(nfqueue::Verdict::Accept);
     }
