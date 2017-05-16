@@ -4,7 +4,8 @@ version = "0.1.0"
 authors = ["Jan Schulte <hello@unexpected-co.de>"]
 
 [dependencies]
-nfqueue = { git = "https://github.com/chifflier/nfqueue-rs.git" }
+nfqueue = { git = "https://github.com/schultyy/nfqueue-rs.git", branch ="cloneable-verdicts" }
 libc = "0.2.22"
 pnet = "0.17.1"
 regex = "0.2"
+text_io = "0.1.6"

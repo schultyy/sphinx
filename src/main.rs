@@ -2,6 +2,7 @@ extern crate nfqueue;
 extern crate libc;
 extern crate pnet;
 extern crate regex;
+#[macro_use] extern crate text_io;
 
 mod state;
 mod process_mon;
@@ -29,9 +30,22 @@ fn queue_callback(msg: &nfqueue::Message, state: &mut State) {
 
         if known_connection.is_some() {
             let conn = known_connection.unwrap();
-            println!("Intercepted(Process: {} - {}) {} -> {}", conn.process, conn.pid, source, destination);
+
+            if let Some(verdict) = state.get_verdict(&conn.process, &destination) {
+                msg.set_verdict(verdict);
+            } else {
+                println!("Intercepted(Process: {} - {}) {} -> {}", conn.process, conn.pid, source, destination);
+                print!("Accept this connection? <y/n> ");
+                let answer :String = read!();
+                if answer == "y" {
+                    msg.set_verdict(nfqueue::Verdict::Accept);
+                    state.add_connection(&conn.process, destination, nfqueue::Verdict::Accept);
+                } else {
+                    msg.set_verdict(nfqueue::Verdict::Drop);
+                    state.add_connection(&conn.process, destination, nfqueue::Verdict::Drop);
+                }
+            }
         }
-        msg.set_verdict(nfqueue::Verdict::Accept);
     }
 }
 

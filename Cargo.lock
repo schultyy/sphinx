@@ -3,9 +3,10 @@ name = "sphinx"
 version = "0.1.0"
 dependencies = [
  "libc 0.2.22 (registry+https://github.com/rust-lang/crates.io-index)",
- "nfqueue 0.9.0 (git+https://github.com/chifflier/nfqueue-rs.git)",
+ "nfqueue 0.9.0 (git+https://github.com/schultyy/nfqueue-rs.git?branch=cloneable-verdicts)",
  "pnet 0.17.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "regex 0.2.1 (registry+https://github.com/rust-lang/crates.io-index)",
+ "text_io 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
 
 [[package]]
@@ -56,7 +57,7 @@ dependencies = [
 [[package]]
 name = "nfqueue"
 version = "0.9.0"
-source = "git+https://github.com/chifflier/nfqueue-rs.git#52b7d80ef1dee395c72ff9b7126d52d6851028dd"
+source = "git+https://github.com/schultyy/nfqueue-rs.git?branch=cloneable-verdicts#41c0a33a8db430ea9fc3d3196b7823be9f031d8b"
 dependencies = [
  "libc 0.2.22 (registry+https://github.com/rust-lang/crates.io-index)",
 ]
@@ -167,6 +168,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "text_io"
+version = "0.1.6"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
 name = "thread-id"
 version = "3.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -234,7 +240,7 @@ dependencies = [
 "checksum libc 0.2.22 (registry+https://github.com/rust-lang/crates.io-index)" = "babb8281da88cba992fa1f4ddec7d63ed96280a1a53ec9b919fd37b53d71e502"
 "checksum log 0.3.7 (registry+https://github.com/rust-lang/crates.io-index)" = "5141eca02775a762cc6cd564d8d2c50f67c0ea3a372cbf1c51592b3e029e10ad"
 "checksum memchr 1.0.1 (registry+https://github.com/rust-lang/crates.io-index)" = "1dbccc0e46f1ea47b9f17e6d67c5a96bd27030519c519c9c91327e31275a47b4"
-"checksum nfqueue 0.9.0 (git+https://github.com/chifflier/nfqueue-rs.git)" = "<none>"
+"checksum nfqueue 0.9.0 (git+https://github.com/schultyy/nfqueue-rs.git?branch=cloneable-verdicts)" = "<none>"
 "checksum pnet 0.17.1 (registry+https://github.com/rust-lang/crates.io-index)" = "ae956ea8ede0403a6f793a77f05986e9617a341e4a7f098ec599669b60ba1d09"
 "checksum pnet_macros 0.13.1 (registry+https://github.com/rust-lang/crates.io-index)" = "84312aba2e2bd52e5ecd95beb44c58b191e9173810e44f1a58cb85bed65baf1c"
 "checksum pnet_macros_support 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)" = "d781ffd3812bf485c4f02210eeec5346ab0c42cdd59881550fff54dab3a098d1"
@@ -246,6 +252,7 @@ dependencies = [
 "checksum syntex_pos 0.42.0 (registry+https://github.com/rust-lang/crates.io-index)" = "3fd49988e52451813c61fecbe9abb5cfd4e1b7bb6cdbb980a6fbcbab859171a6"
 "checksum syntex_syntax 0.42.0 (registry+https://github.com/rust-lang/crates.io-index)" = "7628a0506e8f9666fdabb5f265d0059b059edac9a3f810bda077abb5d826bd8d"
 "checksum term 0.4.5 (registry+https://github.com/rust-lang/crates.io-index)" = "d168af3930b369cfe245132550579d47dfd873d69470755a19c2c6568dbbd989"
+"checksum text_io 0.1.6 (registry+https://github.com/rust-lang/crates.io-index)" = "090d2ee73ae8f01646d500fbb72f99f0b2aea174b7b15d58359bbdf083f73e6d"
 "checksum thread-id 3.1.0 (registry+https://github.com/rust-lang/crates.io-index)" = "8df7875b676fddfadffd96deea3b1124e5ede707d4884248931077518cf1f773"
 "checksum thread_local 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)" = "c85048c6260d17cf486ceae3282d9fb6b90be220bf5b28c400f5485ffc29f0c7"
 "checksum unicode-xid 0.0.3 (registry+https://github.com/rust-lang/crates.io-index)" = "36dff09cafb4ec7c8cf0023eb0b686cb6ce65499116a12201c9e11840ca01beb"
